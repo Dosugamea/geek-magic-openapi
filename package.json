@@ -1,0 +1,32 @@
+{
+  "name": "geek-magic-openapi",
+  "version": "1.0.0",
+  "description": "geek-magic unofficial openapi document",
+  "main": "index.js",
+  "scripts": {
+    "serve:tsp": "pnpm build:tsp --watch",
+    "serve:docs": "pnpm build:docs && pnpm dlx serve",
+    "build:tsp": "tsp compile ./src --output-dir ./dist",
+    "build:docs": "redocly build-docs ./dist/openapi.yaml --output=./dist/openapi.html"
+  },
+  "author": "Dosugamea",
+  "license": "MIT",
+  "packageManager": "pnpm@9.11.0",
+  "engines": {
+    "npm": "forbidden, use pnpm",
+    "yarn": "forbidden, use pnpm",
+    "pnpm": "9.11.0",
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.2",
+    "@redocly/cli": "^1.25.3"
+  },
+  "dependencies": {
+    "@typespec/compiler": "^0.60.1",
+    "@typespec/http": "^0.60.0",
+    "@typespec/openapi": "^0.60.0",
+    "@typespec/openapi3": "^0.60.0",
+    "@typespec/rest": "^0.60.0"
+  }
+}
