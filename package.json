@@ -6,8 +6,8 @@
   "scripts": {
     "serve:tsp": "pnpm build:tsp --watch",
     "serve:docs": "pnpm build:docs && pnpm dlx serve",
-    "build:tsp": "tsp compile ./src --output-dir ./dist",
-    "build:docs": "redocly build-docs ./dist/openapi.yaml --output=./dist/openapi.html"
+    "build:tsp": "tsp compile ./src --output-dir ./docs",
+    "build:docs": "redocly build-docs ./docs/openapi.yaml --output=./docs/openapi.html"
   },
   "author": "Dosugamea",
   "license": "MIT",
