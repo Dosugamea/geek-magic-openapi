@@ -1,0 +1,1071 @@
+openapi: 3.0.0
+info:
+  title: GeekMagic API
+  version: 1.0.0
+  description: GeekMagic API for customizable clock devices
+tags:
+  - name: shared
+  - name: settings
+  - name: pictures
+  - name: time
+  - name: weather
+  - name: network
+paths:
+  /album.json:
+    get:
+      operationId: PicturesRoute_getAutoDisplay
+      summary: Get Device Auto Display
+      description: Get image carousel config status
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pictures.GetAutoDisplayResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - pictures
+  /app.json:
+    get:
+      operationId: SettingsRoute_getDeviceTheme
+      summary: Get Device Theme
+      description: Get current device theme value
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings.GetDeviceThemeResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - settings
+  /auto.json:
+    get:
+      operationId: SettingsRoute_getDeviceAutoSwitchTheme
+      summary: Get Device Auto Switch Theme
+      description: Get current device auto switch theme value
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings.GetDeviceAutoSwitchThemeResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - settings
+  /brt.json:
+    get:
+      operationId: SettingsRoute_getDeviceBrightness
+      summary: Get Device brightness
+      description: Get current device brightness value between -10 to 255
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings.GetDeviceBrightnessResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - settings
+  /city.json:
+    get:
+      operationId: WeatherRoute_getCurrentCityCode
+      summary: Get current city code for weather forecast
+      description: Get current city code for weather forecast
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather.GetCurrentCityCodeResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - weather
+  /colon.json:
+    get:
+      operationId: TimeRoute_getColonBlinkingConfig
+      summary: Get colon blinking in clock configuration
+      description: Get current colon blinking status in clock configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetColonBlinkingConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /config.json:
+    get:
+      operationId: NetworkRoute_getNetworkConfig
+      summary: Get network configuration
+      description: Get current network SSID and PASSWORD
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network.GetNetworkConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - network
+  /day.json:
+    get:
+      operationId: TimeRoute_getDateFormatConfig
+      summary: Get date format configuration
+      description: Get current date format configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetDateFormatConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /delay.json:
+    get:
+      operationId: NetworkRoute_getNetworkDelayConfig
+      summary: Get network delay configuration
+      description: Get network connection delay in seconds
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network.GetNetworkDelayConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - network
+  /delete:
+    get:
+      operationId: SharedRoute_deleteFile
+      summary: Delete file
+      description: Delete specified file (this endpoint always returns 'FAIL' <- WHAT)
+      parameters:
+        - name: file
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/SharedModels.ImagePathValue'
+          explode: false
+      responses:
+        '200':
+          description: Http 200 Success. It happenes when the request is invalid.
+          content:
+            text/html:
+              schema:
+                type: string
+                enum:
+                  - FAIL
+      tags:
+        - shared
+  /dst.json:
+    get:
+      operationId: TimeRoute_getSummerTimeConfig
+      summary: Get summer time configuration
+      description: Get current summer time configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetSummerTimeConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /filelist:
+    get:
+      operationId: SharedRoute_getFileList
+      summary: Get file list
+      description: Get uploaded file list for specified directory in html table
+      parameters:
+        - name: dir
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - /image/
+              - /gif
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/html:
+              schema:
+                type: string
+      tags:
+        - shared
+  /font.json:
+    get:
+      operationId: TimeRoute_getFontConfig
+      summary: Get font configuration
+      description: Get current font configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetFontConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /hour12.json:
+    get:
+      operationId: TimeRoute_getTimeHourFormatConfig
+      summary: Get clock hour format (12 or 24) configuration
+      description: Get current clock hour format configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetTimeHourFormatConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /key.json:
+    get:
+      operationId: WeatherRoute_getWeatherForecastApiKey
+      summary: Get weather forecast api key configuration
+      description: Get current weather forecast api key (untested)
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather.GetWeatherForecastApiKeyResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - weather
+  /ntp.json:
+    get:
+      operationId: TimeRoute_getNtpConfig
+      summary: Get ntp server configuration
+      description: Get current ntp server configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetNtpConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /set:
+    get:
+      operationId: SharedRoute_updateDevice
+      summary: Update Device config (shared)
+      description: |-
+        Update something option of a device.
+        You should specify only one query in a request, if multiple queries are specified it processes only first parameter.
+        But exceptionally, some endpoints wants multiple queries in one request. Please read below sheet carefully.
+
+        - Settings page options:
+          - brt: brightness value between -10 to 255 (seems it has no validation)
+          - theme: device theme value
+          - theme_list: list of theme enabled statuses separated by comma (must be called with sw_en and theme_interval)
+          - sw_en: auto switch enabled status (must be called with theme_list and theme_interval)
+          - theme_interval: interval in seconds (must be called with sw_en and theme_list)
+          - t1: night mode schedule start time (must be called with t2, b1, b2, and en)"
+          - t2: night mode schedule end time (must be called with t1, b1, b2, and en)"
+          - b1: night mode schedule default brightness value (must be called with t1, t2, b2, and en)"
+          - b2: night mode schedule night brightness value (must be called with t1, t2, b1, and en)"
+          - en: night mode enabled status (must be called with t1, t2, b1, and b2)"
+        - Image page options:
+          - img: new image path want to show
+          - i_i: image interval in seconds (must be called with autoplay)
+          - autoplay: 1 if auto switch is enabled, 0 if auto switch is disabled (must be called with i_i)
+        - Time page options:
+          - tc: time color for hours in clock (must be called with mc and sc)
+          - mc: time color for minutes in clock (must be called with tc and sc)
+          - sc: time color for seconds in clock (must be called with tc and mc)
+          - hour: clock hour format (Ex. 12 or 24)
+          - day: clock day format (Ex. YYYY_MM_DD)
+          - colon: 1 if colon blinking is enabled, 0 if colon blinking is disabled
+          - font: time font (1: default big font, 2: digital font)
+          - ntp: ntp server address
+          - dst: 1 when summer time enabled, otherwise 0
+        - Weather page options:
+          - w_i: weather interval in minutes
+          - gif: file path for bottom right mini animation (only works for weather clocks)
+        - Network page options:
+          - delay: delay in seconds before try to connect network at startup (default: 0)
+      parameters:
+        - name: brt
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.BrightnessValue'
+          explode: false
+        - name: theme
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.DeviceDesignTheme'
+          explode: false
+        - name: theme_list
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: sw_en
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: theme_interval
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          explode: false
+        - name: t1
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.HourValue'
+          explode: false
+        - name: t2
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.HourValue'
+          explode: false
+        - name: b1
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.BrightnessValue'
+          explode: false
+        - name: b2
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Settings.BrightnessValue'
+          explode: false
+        - name: en
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          explode: false
+        - name: img
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.ImagePathValue'
+          explode: false
+        - name: i_i
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          explode: false
+        - name: autoplay
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          explode: false
+        - name: tc
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          explode: false
+        - name: mc
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          explode: false
+        - name: sc
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          explode: false
+        - name: hour
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Time.TimeHourFormat'
+          explode: false
+        - name: day
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Time.DateFormat'
+          explode: false
+        - name: colon
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          explode: false
+        - name: font
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Time.TimeFont'
+          explode: false
+        - name: ntp
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: dst
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          explode: false
+        - name: w_i
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.IntervalMinuteValue'
+          explode: false
+        - name: gif
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.ImagePathValue'
+          explode: false
+        - name: delay
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          explode: false
+      responses:
+        '200':
+          description: Http 200 Success. The request has succeeded.
+          content:
+            text/html:
+              schema:
+                anyOf:
+                  - type: string
+                    enum:
+                      - OK
+                  - type: string
+                    enum:
+                      - FAIL
+      tags:
+        - shared
+  /space.json:
+    get:
+      operationId: SharedRoute_getDeviceStorageInfo
+      summary: Get device storage info
+      description: Get device total and free storage size in bytes
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedModels.GetDeviceStorageInfoResponse'
+      tags:
+        - shared
+  /timebrt.json:
+    get:
+      operationId: SettingsRoute_getDeviceBrightnessSchedule
+      summary: Get Device brightness schedule (night mode config)
+      description: Get current device brightness schedule (night mode config)
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings.GetDeviceBrightnessScheduleResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - settings
+  /timecolor.json:
+    get:
+      operationId: TimeRoute_getTimeNumberColorConfig
+      summary: Get time number color configuration
+      description: Get current time number color configuration (seems not working?)
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Time.GetTimeNumberColorConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - time
+  /unit.json:
+    get:
+      operationId: WeatherRoute_getWeatherUnitFormatConfig
+      summary: Get weather unit format configuration
+      description: Get current weather unit format configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather.GetWeatherUnitFormatConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - weather
+  /upload:
+    post:
+      operationId: SharedRoute_uploadFile
+      summary: Upload file
+      description: |-
+        Upload file to specified directory
+        The file format recommendation is different for each directory.
+
+        - "/image"
+          - Extension must be JPG or GIF
+          - Resolusion must be 240x240px
+        - "/gif"
+          - Extension must be GIF
+          - Resolusion must be 80x80px or lower
+      parameters:
+        - name: dir
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - /image
+              - /gif
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/html:
+              schema:
+                anyOf:
+                  - type: string
+                  - type: string
+                    enum:
+                      - FAIL
+      tags:
+        - shared
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SharedModels.UploadFileRequestMultiPart'
+  /v.json:
+    get:
+      operationId: SettingsRoute_getDeviceInfo
+      summary: Get Device information
+      description: Get device name and version
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings.GetDeviceInfoResponse'
+      tags:
+        - settings
+  /w_i.json:
+    get:
+      operationId: WeatherRoute_getWeatherUpdateIntervalConfig
+      summary: Get weather update interval configuration
+      description: Get current weather update interval configuration
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather.GetWeatherUpdateIntervalConfigResponse'
+        '404':
+          description: Http 404 Error. The endpoints raises 404 error if no value is unset by another endpoints. (The devices seems have no default value.)
+      tags:
+        - weather
+  /wifisave:
+    post:
+      operationId: NetworkRoute_updateNetworkConfig
+      summary: Update network configuration
+      description: Update network SSID and PASSWORD
+      parameters:
+        - name: s
+          in: query
+          required: true
+          description: new network SSID
+          schema:
+            type: string
+          explode: false
+        - name: p
+          in: query
+          required: true
+          description: new network PASSWORD (PLAIN TEXT)
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: Http 200 Success. The request has succeeded.
+          content:
+            text/html:
+              schema:
+                anyOf:
+                  - type: string
+                    enum:
+                      - OK
+                  - type: string
+                    enum:
+                      - FAIL
+      tags:
+        - network
+components:
+  schemas:
+    Network.GetNetworkConfigResponse:
+      type: object
+      required:
+        - a
+        - p
+      properties:
+        a:
+          type: string
+          example: SSID
+          description: stored network ssid
+        p:
+          type: string
+          example: password
+          description: stored network password (PLAIN TEXT)
+    Network.GetNetworkDelayConfigResponse:
+      type: object
+      required:
+        - d
+      properties:
+        d:
+          anyOf:
+            - type: number
+              enum:
+                - 0
+            - $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          example: 0
+          description: stored network connection delay in seconds
+    Pictures.GetAutoDisplayResponse:
+      type: object
+      required:
+        - autoplay
+        - i_i
+      properties:
+        autoplay:
+          type: number
+          enum:
+            - 0
+            - 1
+          example: 0
+          description: 1 if auto switch is enabled, 0 if auto switch is disabled
+        i_i:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          example: 10
+          description: 'interval in seconds (default: 10)'
+    Settings.BrightnessValue:
+      type: number
+      minimum: -10
+      maximum: 255
+      description: brightness value between -10 to 255
+    Settings.DeviceDesignTheme:
+      type: number
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+      description: |-
+        Display design of the device
+
+        - 1: WEATHER_CLOCK_TODAY
+        - 2: WEAHTER_FORECAST
+        - 3: PHOTO_ALBUM
+        - 4: TIME_STYLE_1
+        - 5: TIME_STYLE_2
+        - 6: TIME_STYLE_3
+        - 7: SIMPLE_WEATHER_CLOCK
+    Settings.GetDeviceAutoSwitchThemeResponse:
+      type: object
+      required:
+        - sw_en
+        - theme
+        - sw_i
+      properties:
+        sw_en:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          description: 1 if auto switch is enabled, 0 if auto switch is disabled
+        theme:
+          type: string
+          description: list of theme enabled statuses separated by comma (the order is same as DeviceDesignTheme)
+        sw_i:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.IntervalSecondValue'
+          description: 'interval in seconds (default: 10)'
+    Settings.GetDeviceBrightnessResponse:
+      type: object
+      required:
+        - brt
+      properties:
+        brt:
+          allOf:
+            - $ref: '#/components/schemas/Settings.BrightnessValue'
+          example: 128
+    Settings.GetDeviceBrightnessScheduleResponse:
+      type: object
+      required:
+        - en
+        - t1
+        - t2
+        - b2
+      properties:
+        en:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          description: 1 if brightness schedule is enabled, 0 if brightness schedule is disabled
+        t1:
+          allOf:
+            - $ref: '#/components/schemas/Settings.HourValue'
+          description: start time (hours from 0 to 23)
+        t2:
+          allOf:
+            - $ref: '#/components/schemas/Settings.HourValue'
+          description: end time (hours from 0 to 23)
+        b2:
+          allOf:
+            - $ref: '#/components/schemas/Settings.BrightnessValue'
+          description: brightness value while in specified time range (b1 doesn't exist in this response, you need to get it from /brt.json)
+    Settings.GetDeviceInfoResponse:
+      type: object
+      required:
+        - m
+        - v
+      properties:
+        m:
+          type: string
+          example: SmallTV-Ultra
+          description: model name
+        v:
+          type: string
+          example: Ultra-V9.0.26
+          description: model version
+    Settings.GetDeviceThemeResponse:
+      type: object
+      required:
+        - theme
+      properties:
+        theme:
+          $ref: '#/components/schemas/Settings.DeviceDesignTheme'
+    Settings.HourValue:
+      type: number
+      minimum: 0
+      maximum: 23
+    SharedModels.BooleanLikeNumberValue:
+      type: number
+      enum:
+        - 1
+        - 0
+      description: 1 if enabled, 0 if disabled (this api doesn't use boolean)
+    SharedModels.GetDeviceStorageInfoResponse:
+      type: object
+      required:
+        - total
+        - free
+      properties:
+        total:
+          type: number
+          example: 3121152
+          description: total storage size in bytes
+        free:
+          type: number
+          example: 97804
+          description: free storage size in bytes
+    SharedModels.HtmlColorValue:
+      type: string
+      example: '#FFFFFF'
+      pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+      description: HTML color in hex
+    SharedModels.ImagePathValue:
+      type: string
+      example: /image//ezgif-3-d2f3e68a3c.jpg
+      description: image path value (weird but second separater is '//')
+    SharedModels.IntervalMinuteValue:
+      type: number
+      minimum: 1
+      maximum: 2147483647
+      description: interval in minutes between 1 and 2147483647 (actually it has no validation and makes overflow)
+    SharedModels.IntervalSecondValue:
+      type: number
+      minimum: 1
+      maximum: 2147483647
+      description: interval in seconds between 1 and 2147483647 (actually it has no validation and makes overflow)
+    SharedModels.UploadFileRequestMultiPart:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          format: binary
+    Time.DateFormat:
+      type: number
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+    Time.GetColonBlinkingConfigResponse:
+      type: object
+      required:
+        - colon
+      properties:
+        colon:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          example: 0
+          description: 1 when colon blinking enabled, otherwise 0
+    Time.GetDateFormatConfigResponse:
+      type: object
+      required:
+        - day_fmt
+      properties:
+        day_fmt:
+          allOf:
+            - $ref: '#/components/schemas/Time.DateFormat'
+          example: 1
+          description: |-
+            current date format
+
+            - 1: DD_MM_YYYY
+            - 2: YYYY_MM_DD
+            - 3: MM_DD_YYYY
+            - 4: MM_DD
+            - 5: DD_MM
+    Time.GetFontConfigResponse:
+      type: object
+      required:
+        - font
+      properties:
+        font:
+          allOf:
+            - $ref: '#/components/schemas/Time.TimeFont'
+          example: 1
+          description: |-
+            current time font
+
+            - 1: default big font
+            - 2: digital font
+    Time.GetNtpConfigResponse:
+      type: object
+      required:
+        - ntp
+      properties:
+        ntp:
+          type: string
+          example: pool.ntp.org
+          description: ntp server address
+    Time.GetSummerTimeConfigResponse:
+      type: object
+      required:
+        - dst
+      properties:
+        dst:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.BooleanLikeNumberValue'
+          example: 0
+          description: 1 when summer time enabled, otherwise 0
+    Time.GetTimeHourFormatConfigResponse:
+      type: object
+      required:
+        - h
+      properties:
+        h:
+          allOf:
+            - $ref: '#/components/schemas/Time.TimeHourFormat'
+          example: 0
+          description: |-
+            current time hour format
+
+            - 0: 24 hours format
+            - 1: 12 hours format
+    Time.GetTimeNumberColorConfigResponse:
+      type: object
+      required:
+        - hc
+        - mc
+        - sc
+      properties:
+        hc:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          example: '#ffffff'
+          description: current time color for hours
+        mc:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          example: '#feba01'
+          description: current time color for minutes
+        sc:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.HtmlColorValue'
+          example: '#ff5900'
+          description: current time color for seconds
+    Time.TimeFont:
+      type: number
+      enum:
+        - 1
+        - 2
+    Time.TimeHourFormat:
+      type: number
+      enum:
+        - 0
+        - 1
+    Weather.GetCurrentCityCodeResponse:
+      type: object
+      required:
+        - cd
+        - ct
+        - loc
+        - mt
+        - t
+      properties:
+        cd:
+          type: string
+          example: '1850147'
+          description: current city code in number string
+        ct:
+          type: string
+          example: Tokyo
+          description: current city name (short)
+        loc:
+          type: string
+          example: Tokyo,JP
+          description: current city name (full)
+        mt:
+          type: string
+          example: '0'
+          description: unknown
+        t:
+          type: string
+          example: '9'
+          description: timezone offset in hours
+    Weather.GetWeatherForecastApiKeyResponse:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          type: string
+          example: '1234567890'
+          description: weather forecast api key
+    Weather.GetWeatherUnitFormatConfigResponse:
+      type: object
+      required:
+        - w_u
+        - t_u
+        - p_u
+      properties:
+        w_u:
+          type: string
+          enum:
+            - m/s
+            - km/h
+            - mile/h
+          example: m/s
+          description: wind speed unit
+        t_u:
+          type: string
+          enum:
+            - Â°C
+            - Â°F
+          example: Â°C
+          description: 'temperature unit (default: Â°C) (charset is buggy but working)'
+        p_u:
+          type: string
+          enum:
+            - hPa
+            - kPa
+            - mmHg
+            - inHg
+          example: hPa
+          description: pressure unit
+    Weather.GetWeatherUpdateIntervalConfigResponse:
+      type: object
+      required:
+        - w_i
+      properties:
+        w_i:
+          allOf:
+            - $ref: '#/components/schemas/SharedModels.IntervalMinuteValue'
+          example: 20
+          description: weather update interval in minutes
+servers:
+  - url: http://192.168.0.0
+    description: GeekMagic API
+    variables: {}
