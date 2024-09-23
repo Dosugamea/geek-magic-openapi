@@ -4,7 +4,7 @@
 ![OpenAPI 3.0 logo](https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square)
 
 Unofficial GeekMagic OpenApi document written in [TypeSpec](https://typespec.io/).
-Researched on [Geekmagic-smalltv](aliexpress.com/item/1005006159850972.html) but it should be works for other devices.
+Researched on [Geekmagic-smalltv](https://aliexpress.com/item/1005006159850972.html) but it should be works for other devices.
 
 ## How to use
 
