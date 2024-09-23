@@ -1,5 +1,5 @@
-# geek-magic-openapi
-Unofficial geek magic openapi document
+# GeekMagic OpenApi
+Unofficial GeekMagic OpenApi document
 
 ## License
 MIT
